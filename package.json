@@ -7,9 +7,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "formidable": "^3.5.0",
     "next": "latest",
+    "node-fetch": "^3.3.2",
     "react": "latest",
-    "react-dom": "latest",
-    "formidable": "^3.5.0"
+    "react-dom": "latest"
   }
 }
