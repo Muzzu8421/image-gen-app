@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "form-data": "^4.0.3",
     "formidable": "^3.5.0",
     "next": "latest",
     "node-fetch": "^3.3.2",

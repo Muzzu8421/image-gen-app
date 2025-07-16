@@ -2,6 +2,7 @@
 import formidable from 'formidable';
 import fs from 'fs';
 import fetch from 'node-fetch';
+import FormData from 'form-data';
 
 export const config = { api: { bodyParser: false } };
 
@@ -17,13 +18,13 @@ export default async function handler(req, res) {
       formData.append('prompt', fields.prompt);
       formData.append('mode', fields.mode || 'text2img');
       if (files.image) {
-        const buffer = fs.readFileSync(files.image.filepath);
-        formData.append('image', new Blob([buffer]), files.image.originalFilename);
+        formData.append('image', fs.createReadStream(files.image.filepath), files.image.originalFilename);
       }
 
       const response = await fetch(DIFFUSION_API, {
         method: 'POST',
         body: formData,
+        headers: formData.getHeaders(),
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || 'Inference error');
